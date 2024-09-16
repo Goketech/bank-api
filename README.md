@@ -78,7 +78,7 @@ A real-time event logging service built with Node.js, Express, and WebSocket.
 ### Bank Account Management API
 - Access the API at `http://localhost:3000`
 - Use endpoints for user registration, login, account management, and transactions
-- Refer to the [API Documentation](/docs) for detailed endpoint information
+- Refer to the [API Documentation](https://classical-elsie-gokeee-d08fef73.koyeb.app/docs) for detailed endpoint information
 
 ### WebSocket Event Logger
 - Connect to the WebSocket server at `ws://localhost:3001`
