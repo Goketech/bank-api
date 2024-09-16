@@ -106,9 +106,7 @@ describe('Account Endpoints', () => {
   });
 
   it('should fetch all user accounts', async () => {
-    const res = await request(app)
-      .get('/api/v1/accounts')
-      .set('Authorization', `Bearer ${token}`);
+    const res = await request(app).get('/api/v1/accounts').set('Authorization', `Bearer ${token}`);
 
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty('message', 'User accounts retrieved successfully');

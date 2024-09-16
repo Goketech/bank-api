@@ -353,8 +353,6 @@ export const getTransactionHistory = async (req: AuthRequest, res: Response) => 
   }
 };
 
-
-
 /**
  * @swagger
  * /api/v1/transactions:
@@ -451,52 +449,48 @@ export const getTransactionHistory = async (req: AuthRequest, res: Response) => 
  *                   type: string
  */
 export const getAllUserTransactions = async (req: AuthRequest, res: Response) => {
-    try {
-  
-      const userAccounts = await Account.find({ userId: req.user._id });
-  
-      if (userAccounts.length === 0) {
-        return res.status(404).json({
-          status: 'error',
-          success: false,
-          status_code: 404,
-          message: 'No accounts found for this user',
-        });
-      }
-  
-      const accountNumbers = userAccounts.map(account => account.accountNumber);
-  
-      const transactions = await Transaction.find({
-        $or: [
-          { fromAccount: { $in: accountNumbers } },
-          { toAccount: { $in: accountNumbers } }
-        ]
-      }).sort({ createdAt: -1 });
-  
-      res.status(200).json({
-        message: 'All user transactions retrieved successfully',
-        success: true,
-        status: 'success',
-        status_code: 200,
-        data: {
-          transactions: transactions.map((t) => ({
-            fromAccount: t.fromAccount,
-            toAccount: t.toAccount,
-            amount: t.amount,
-            type: t.type,
-            description: t.description,
-            createdAt: t.createdAt,
-          })),
-        },
-      });
-    } catch (error) {
-      console.error('Error in getAllUserTransactions:', error);
-      res.status(500).json({
-        message: 'Could not fetch user transactions',
-        error: error.message,
+  try {
+    const userAccounts = await Account.find({ userId: req.user._id });
+
+    if (userAccounts.length === 0) {
+      return res.status(404).json({
         status: 'error',
         success: false,
-        status_code: 500,
+        status_code: 404,
+        message: 'No accounts found for this user',
       });
     }
-  };
+
+    const accountNumbers = userAccounts.map((account) => account.accountNumber);
+
+    const transactions = await Transaction.find({
+      $or: [{ fromAccount: { $in: accountNumbers } }, { toAccount: { $in: accountNumbers } }],
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json({
+      message: 'All user transactions retrieved successfully',
+      success: true,
+      status: 'success',
+      status_code: 200,
+      data: {
+        transactions: transactions.map((t) => ({
+          fromAccount: t.fromAccount,
+          toAccount: t.toAccount,
+          amount: t.amount,
+          type: t.type,
+          description: t.description,
+          createdAt: t.createdAt,
+        })),
+      },
+    });
+  } catch (error) {
+    console.error('Error in getAllUserTransactions:', error);
+    res.status(500).json({
+      message: 'Could not fetch user transactions',
+      error: error.message,
+      status: 'error',
+      success: false,
+      status_code: 500,
+    });
+  }
+};
