@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+</head>
+<body>
+    <input type="text" id="message-input" placeholder="Enter message">
+    <button id="submit-btn">Submit</button>
+    <button id="toggle-error-btn">Toggle Error</button>
+
+    <script>
+        const socket = new WebSocket('ws://localhost:8000');
+
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            const message = document.getElementById('message-input').value;
+            socket.send(JSON.stringify({
+                type: 'event.interaction',
+                data: message
+            }));
+        });
+
+        document.getElementById('toggle-error-btn').addEventListener('click', () => {
+            socket.send(JSON.stringify({
+                type: 'event.error',
+                data: Math.random().toString(36).substring(7)
+            }));
+        });
+    </script>
+</body>
+</html>
