@@ -15,10 +15,6 @@ const PORT = config.PORT || 3001;
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Welcome to Mono Events API' });
-});
-
 app.get('/errors.txt', (req, res) => {
   res.sendFile(path.join(dirname, 'errors.txt'));
 });
