@@ -94,7 +94,7 @@ Brief description of your API endpoints. For example:
 - `GET /api/v1/transactions`: Get all user transactions across all acounts (requires authentication)
 - `GET /api/v1/transactions/:accountNumber`: Get transaction details associated with an account (requires authentication)
 
-For more detailed API documentation, refer to [Latest Documentation](https://classical-elsie-gokeee-d08fef73.koyeb.app/docs).
+For more detailed API documentation, refer to [Latest Documentation](https://events-api-cav5.onrender.com/docs).
 
 ## Contributing
 
