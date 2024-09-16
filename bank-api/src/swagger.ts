@@ -16,7 +16,7 @@ const swaggerDefinition: SwaggerDefinition = {
       description: 'Local server',
     },
     {
-      url: '',
+      url: 'https://classical-elsie-gokeee-d08fef73.koyeb.app/docs',
       description: 'Live server',
     },
   ],

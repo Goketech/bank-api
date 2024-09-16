@@ -1,104 +1,107 @@
-# Bank Account Management REST API
+# Bank API Project
 
-This project contains an A NodeJS(typescript) & MongoDB bank accounts management REST API.
+This project consists of two main services:
+1. Bank Account Management REST API
+2. WebSocket Event Logger
+
+Together, these services provide a comprehensive solution for managing bank accounts and logging events in real-time.
+
+## Service 1: Bank Account Management REST API
+
+A Node.js (TypeScript) & MongoDB-based REST API for managing bank accounts.
+
+### Key Features
+- User registration and authentication
+- Account creation and management
+- Transaction processing
+- Detailed API documentation
+
+## Service 2: WebSocket Event Logger
+
+A real-time event logging service built with Node.js, Express, and WebSocket.
+
+### Key Features
+- WebSocket server for real-time communication
+- Logs interaction and error events to separate files
+- Serves static files and provides HTTP access to log files
 
 ## Prerequisites
 
-Before you begin, ensure you have met the following requirements:
+- Node.js (version 20.0.0 or later)
+- npm (version 9.6.4 or later)
+- MongoDB (version 8.0.0 or later)
 
-* You have installed Node.js (version 20.0.0 or later)
-* You have installed MongoDB (version 8.0.0 or later)
-* You have a Windows/Linux/Mac machine
+## Getting Started
 
-## Installing and Running Locally
-
-To install and run this project locally, follow these steps:
-
-1. Clone the repository
+1. Clone the repository:
    ```
    git clone https://github.com/goketech/bank-api.git
    ```
 
-2. Navigate to the project directory
+2. Navigate to the project directory:
    ```
    cd bank-api
    ```
 
-3. Install dependencies
+3. Install dependencies for both services:
    ```
-   npm install
+   cd bank-api && npm install
+   cd ../events-api && npm install
    ```
 
-4. Set up environment variables
-   - Create a `.env` file in the root directory
+4. Set up environment variables:
+   - Create a `.env` file in the `bank-api` directory
    - Add the following variables:
      ```
      PORT=3000
      MONGODB_URI=mongodb://localhost:27017/your-database-name
      JWT_SECRET=your-secret-key
      ```
-   Replace `your-database-name` and `your-secret-key` with your preferred values.
 
-   You could also create MongoDB Atlas account and replace `mongodb://localhost:27017/your-database-name` with your connection URL.
+5. Configure the WebSocket service:
+   - Update the `PORT` in `events-api/config/config.js` if needed (default: 3001)
 
-5. Start MongoDB
-   - Make sure your MongoDB server is running
+6. Start MongoDB server
 
-6. Run the application
-   - For development:
+7. Run both services:
+   - For Bank API (in the `bank-api` directory):
      ```
      npm run dev
      ```
-   - For production:
+   - For Event Logger (in the `events-api` directory):
      ```
      npm start
      ```
 
-The server should now be running on `http://localhost:3000` (or whatever port you specified in the .env file).
+## Usage
 
-## Running Tests
+### Bank Account Management API
+- Access the API at `http://localhost:3000`
+- Use endpoints for user registration, login, account management, and transactions
+- Refer to the [API Documentation](/docs) for detailed endpoint information
 
-To run tests, use the following command:
+### WebSocket Event Logger
+- Connect to the WebSocket server at `ws://localhost:3001`
+- Send JSON-formatted messages to log events
+- Access logs via HTTP at:
+  - `http://localhost:3001/interactions.txt`
+  - `http://localhost:3001/errors.txt`
 
+## Development
+
+### Running Tests (Bank API)
 ```
 npm test
 ```
 
-## Linting and Formatting
-
-This project uses ESLint and Prettier for code linting and formatting. To run these:
-
-- Lint the code:
-  ```
-  npm run lint
-  ```
-- Fix linting issues:
-  ```
-  npm run lint:fix
-  ```
-- Format the code:
-  ```
-  npm run format
-  ```
-
-## API Documentation
-
-Brief description of your API endpoints. For example:
-
-- `POST /api/v1/auth/register`: Register a new user
-- `POST /api/v1/auth/login`: Login a user
-- `GET /api/v1/accounts`: Get all accounts (requires authentication)
-- `POST /api/v1/accounts`: Create a new account (requires authentication)
-- `GET /api/v1/accounts/:accountNumber`: Search for an account by number
-- `POST /api/v1/transactions`: Create a new transaction (requires authentication)
-- `GET /api/v1/transactions`: Get all user transactions across all acounts (requires authentication)
-- `GET /api/v1/transactions/:accountNumber`: Get transaction details associated with an account (requires authentication)
-
-For more detailed API documentation, refer to [Latest Documentation](/docs).
+### Linting and Formatting (Bank API)
+```
+npm run lint
+npm run lint:fix
+npm run format
+```
 
 ## Contributing
-
-If you want to contribute to this project, please follow these steps:
 
 1. Fork the repository
 2. Create a new branch (`git checkout -b feature/your-feature-name`)
@@ -109,8 +112,8 @@ If you want to contribute to this project, please follow these steps:
 
 ## Contact
 
-If you have any questions or feedback, please contact [Modupe](mailto:modupe775@gmail.com).
+For questions or feedback, please contact [Modupe](mailto:modupe775@gmail.com).
 
 ## License
 
-This project uses the following license: [ISC](./LICENSE).
+This project is licensed under the [ISC License](./LICENSE).
